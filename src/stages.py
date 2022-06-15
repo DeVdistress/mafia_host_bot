@@ -123,8 +123,8 @@ def set_order(game):
 
     database.games.update_one({'_id': game['_id']}, {'$set': {'message_id': message_id}})
 
-
-@add_stage(-1, 5)
+### DeVdistress @add_stage(-1, 5)
+@add_stage(-1, 10)
 def get_order(game):
     keyboard = InlineKeyboardMarkup()
     keyboard.add(
@@ -141,8 +141,8 @@ def get_order(game):
         reply_markup=keyboard
     )
 
-
-@add_stage(0, lambda g: 90 + max(0, sum(p['alive'] for p in g['players']) - 4) * 35)
+### DeVdistress @add_stage(0, lambda g: 90 + max(0, sum(p['alive'] for p in g['players']) - 4) * 35)
+@add_stage(0, lambda g: 60 + max(0, sum(p['alive'] for p in g['players']) - 4) * 20)
 def discussion(game):
     if game['day_count'] > 1 and game.get('victim') is None:
         bot.edit_message_text(
@@ -244,8 +244,8 @@ def night(game):
         }
     )
 
-
-@add_stage(4, 5)
+### DeVdistress @add_stage(4, 5)
+@add_stage(4, 15)
 def shooting_stage(game):
     players = [(i, player) for i, player in enumerate(game['players']) if player['alive']]
     random.shuffle(players)
@@ -265,8 +265,8 @@ def shooting_stage(game):
         reply_markup=keyboard
     )
 
-
-@add_stage(5, 10)
+### DeVdistress add_stage(5, 10)
+@add_stage(5, 15)
 def don_stage(game):
     keyboard = InlineKeyboardMarkup(row_width=8)
     keyboard.add(
@@ -283,8 +283,8 @@ def don_stage(game):
         reply_markup=keyboard
     )
 
-
-@add_stage(6, 10)
+### DeVdistress @add_stage(6, 10)
+@add_stage(6, 15)
 def sheriff_stage(game):
     keyboard = InlineKeyboardMarkup(row_width=8)
     keyboard.add(
